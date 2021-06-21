@@ -1,0 +1,2 @@
+USE `employees`;
+create table meeting (id bigint not null auto_increment, meeting_name varchar(255), `start` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, `end` TIMESTAMP DEFAULT CURRENT_TIMESTAMP, room_id bigint, primary key (id));
