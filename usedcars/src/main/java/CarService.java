@@ -2,6 +2,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CarService {
@@ -13,4 +14,10 @@ public class CarService {
     public  List<Car> listCars() {
         return cars;
     }
+
+    public List<String> getBrands() {
+    return cars.stream().map(Car::getBrand)
+            .distinct()
+    .collect(Collectors.toList());}
+
 }

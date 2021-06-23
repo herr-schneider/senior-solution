@@ -6,7 +6,7 @@ import java.util.List;
 @RestController
 public class CarController {
 
-private CarService carService;
+private final CarService carService;
 
     public CarController(CarService carService) {
         this.carService = carService;
@@ -17,4 +17,9 @@ private CarService carService;
         return carService.listCars();
     }
 
+    @GetMapping("/types")
+    public List<String> listBrands() {
+
+        return carService.getBrands();
+    }
 }

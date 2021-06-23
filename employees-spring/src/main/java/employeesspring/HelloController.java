@@ -4,8 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class HelloController {
 
     //@Autowired kell, ha nincs Contructor injection, ne használjuk
@@ -16,8 +17,8 @@ public class HelloController {
         this.helloService = helloService;
     }
 
+    //@ResponseBody  RestController eseten nem kell
     @GetMapping("/")
-    @ResponseBody  //RestController eseten nem kell
     public String sayHello() {
         return helloService.sayHello();
     }
