@@ -36,4 +36,14 @@ public class EmployeesController {
         return employeesService.findEmployeeByID(id);
     }
 
+    @PostMapping
+    public EmployeeDto createEmployee(@RequestBody CreateEmployeeCommand createEmployeeCommand){
+        return employeesService.createEmployee(createEmployeeCommand);
+    }
+
+    @GetMapping("/param/{id}")
+    public EmployeeDto updateEmployee(@PathVariable("id") long id) {
+        return employeesService.updateEmployee();
+    }
+
 }

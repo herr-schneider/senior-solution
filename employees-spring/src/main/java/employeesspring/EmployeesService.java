@@ -9,20 +9,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Service
 public class EmployeesService {
 
     private ModelMapper modelMapper;
+    private AtomicLong idgen = new AtomicLong();
 
     public EmployeesService(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
     private List<Employee> employees = Collections.synchronizedList(new ArrayList<>(List.of(
-            new Employee(1L, "John Doe"),
-            new Employee(2L, "Jane Doe")
+            new Employee(idgen.incrementAndGet(), "John Doe"),
+            new Employee(idgen.incrementAndGet(), "Jane Doe")
     )));
 
     public List<Employee> listEmployee() {
@@ -50,5 +52,15 @@ public class EmployeesService {
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("There is no" + id)),
                 EmployeeDto.class);
+    }
+
+    public EmployeeDto createEmployee(CreateEmployeeCommand createEmployeeCommand){
+        Employee employee = new Employee(idgen.incrementAndGet(), createEmployeeCommand.getName());
+        employees.add(employee);
+        return modelMapper.map(employee, EmployeeDto.class);
+    }
+
+    public EmployeeDto updateEmployee() {
+        return new EmployeeDto();
     }
 }
