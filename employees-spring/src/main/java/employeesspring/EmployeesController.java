@@ -41,9 +41,13 @@ public class EmployeesController {
         return employeesService.createEmployee(createEmployeeCommand);
     }
 
-    @GetMapping("/param/{id}")
-    public EmployeeDto updateEmployee(@PathVariable("id") long id) {
-        return employeesService.updateEmployee();
+    @PutMapping("/param/{id}")
+    public EmployeeDto updateEmployee(@PathVariable("id") long id, @RequestBody UpdateEmployeeCommand command) {
+        return employeesService.updateEmployee(id, command);
     }
 
+    @DeleteMapping("/param/{id}")
+    public void deleteEmployee(@PathVariable("id") long id) {
+        employeesService.deleteEmployee(id);
+    }
 }

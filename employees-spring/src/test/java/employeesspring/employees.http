@@ -3,12 +3,24 @@ Content-Type: application/json
 
 ###
 
-
 POST http://localhost:8080/api/emp
 Accept: application/json
 Content-Type: application/json
 
 {
-"name" : "Jane Doe"
+"name" : "Bill Doe"
 }
 
+###
+
+PUT http://localhost:8080/api/emp/param/2
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "Jane Doe"
+}
+
+###
+
+DELETE http://localhost:8080/api/emp/param/2
