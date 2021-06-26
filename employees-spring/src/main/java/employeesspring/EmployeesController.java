@@ -81,7 +81,7 @@ public class EmployeesController {
     public ResponseEntity<Problem> handleNotFound(IllegalArgumentException iae){
         Problem problem = Problem.builder()
                 .withType(URI.create("/api/emp/param"))
-                .withTitle("Not found! ")
+                .withTitle("Not found!")
                 .withStatus(Status.NOT_FOUND)
                 .withDetail(iae.getMessage())
                 .build();

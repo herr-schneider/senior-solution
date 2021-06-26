@@ -50,7 +50,7 @@ public class EmployeesService {
         return modelMapper.map(employees.stream()
                 .filter(e -> e.getId() == id)
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException("There is no" + id)),
+                .orElseThrow(() -> new IllegalArgumentException("There is no " + id)),
                 EmployeeDto.class);
     }
 
