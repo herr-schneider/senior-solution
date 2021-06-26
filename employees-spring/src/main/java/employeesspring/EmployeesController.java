@@ -1,10 +1,13 @@
 package employeesspring;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.zalando.problem.Problem;
+import org.zalando.problem.Status;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,13 +37,18 @@ public class EmployeesController {
     }
 
     @GetMapping("/param/{id}")
-    public ResponseEntity findEmployeeByID(@PathVariable("id") long id) {
-        try {
-            return ResponseEntity.ok(employeesService.findEmployeeByID(id));
-        }catch (IllegalArgumentException iae) {
-            return ResponseEntity.notFound().build();
-        }
+    public EmployeeDto findEmployeeByID(@PathVariable("id") long id) {
+            return employeesService.findEmployeeByID(id);
     }
+
+//    @GetMapping("/param/{id}")
+//    public ResponseEntity findEmployeeByID(@PathVariable("id") long id) {
+//        try {
+//            return ResponseEntity.ok(employeesService.findEmployeeByID(id));
+//        }catch (IllegalArgumentException iae) {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -67,4 +75,20 @@ public class EmployeesController {
     public void deleteEmployee(@PathVariable("id") long id) {
         employeesService.deleteEmployee(id);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Problem> handleNotFound(IllegalArgumentException iae){
+        Problem problem = Problem.builder()
+                .withType(URI.create("/api/emp/param"))
+                .withTitle("Not found! ")
+                .withStatus(Status.NOT_FOUND)
+                .withDetail(iae.getMessage())
+                .build();
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+                .body(problem);
+    }
+
 }
