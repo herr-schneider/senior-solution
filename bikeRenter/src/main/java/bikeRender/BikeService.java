@@ -45,10 +45,10 @@ public class BikeService {
                 result = line.split(";");
                 dateTime = result[2].split(" ");
                 date = dateTime[0].split("-");
-                time = dateTime[0].split(":");
+                time = dateTime[1].split(":");
                 localDateTime = LocalDateTime.of(Integer.parseInt(date[0]), Integer.parseInt(date[1]), Integer.parseInt(date[2]),
                         Integer.parseInt(time[0]), Integer.parseInt(time[1]), Integer.parseInt(time[2]));
-                output.add(new Bike(result[0], result[1], localDateTime, Integer.parseInt(result[3])));
+                output.add(new Bike(result[0], result[1], localDateTime, Double.valueOf(result[3])));
             }
         } catch (IOException ioe) {
             throw new IllegalArgumentException("File not found", ioe);
@@ -66,5 +66,9 @@ public class BikeService {
                 .collect(Collectors.toList());
 
 
+    }
+
+    public String greeting() {
+        return "Hello";
     }
 }

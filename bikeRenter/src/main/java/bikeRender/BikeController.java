@@ -23,4 +23,9 @@ public class BikeController {
     public List<String> getUsers() {
         return bikeService.getUsers();
     }
+
+    @GetMapping("/")
+    public String greetings() {
+        return bikeService.greeting();
+    }
 }
