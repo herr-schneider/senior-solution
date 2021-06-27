@@ -1,0 +1,41 @@
+package employeesspring;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.web.servlet.MockMvc;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.mockito.Mockito.when;
+
+@WebMvcTest(controllers = EmployeesController.class)
+public class EmployeesControllerWebMvcIT {
+
+    @MockBean
+    EmployeesService employeesService;
+
+    @Autowired
+    MockMvc mockMvc;
+
+    @Test
+    void testAllEmployees() throws Exception{
+        when(employeesService.listEmployeeParam(any()))
+                .thenReturn(List.of(
+                        new EmployeeDto(1L, "John Doe"),
+                        new EmployeeDto(2L, "Jane Doe")
+                ));
+        mockMvc.perform(get("/api/emp/param"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].name", equalTo("John Doe")))
+                .andDo(print());
+    }
+}
