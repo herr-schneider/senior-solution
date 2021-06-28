@@ -14,6 +14,16 @@ public class BikeIT {
     @Autowired
     private BikeController bc;
 
+
+    @Test
+    void getHistoryTest() {
+        List<Bike> result = bc.getBikes();
+        assertThat(result).hasSize(5)
+                .extracting(Bike::getAzon)
+                .contains("FH675");
+    }
+
+
     @Test
     void testAllBiker() {
         List<Bike> result = bc.getBikes();

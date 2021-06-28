@@ -1,3 +1,20 @@
+GET http://localhost:8080/api/emp/test?prefix=john&valami=test
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/api/emp/test?prefix=john&valami=test
+Content-Type: application/json
+
+###
+
+GET http://localhost:8080/api/emp/param?prefix=john
+Content-Type: application/json
+
+<> 2021-06-28T155719.200.json
+
+###
+
 GET http://localhost:8080/api/emp/param/3
 Content-Type: application/json
 

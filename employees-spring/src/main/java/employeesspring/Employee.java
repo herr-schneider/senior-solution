@@ -4,21 +4,23 @@ package employeesspring;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-// @AllArgsConstructor
-@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
+//@NoArgsConstructor
 @Data
 public class Employee {
     private Long id;
     private String name;
 
-    public Employee(String name) {
-        this.name = name;
-    }
-
-    public Employee(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
+//    public Employee(String name) {
+//        this.name = name;
+//    }
+//
+//    public Employee(Long id, String name) {
+//        this.id = id;
+//        this.name = name;
+//    }
 
 }

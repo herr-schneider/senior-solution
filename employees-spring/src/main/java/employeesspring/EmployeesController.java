@@ -9,6 +9,7 @@ import org.zalando.problem.Status;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -32,7 +33,7 @@ public class EmployeesController {
     }
 
     @GetMapping("/param")
-    public List<EmployeeDto> listEmployeeParam(@RequestParam Optional<String> prefix) {
+    public List<EmployeeDto> listEmployeeParam(@RequestParam Optional<String> prefix) { //ResponseBody párja
         return employeesService.listEmployeeParam(prefix);
     }
 
@@ -91,4 +92,16 @@ public class EmployeesController {
                 .body(problem);
     }
 
+    @GetMapping("/test")
+    public String dontDoThat(@RequestParam Map<String, String> myParam) { //ResponseBody párja
+        // return myParam.values().toString();
+        // return myParam.keySet().toString();
+        return myParam.toString();
+    }
+
+//    data  http
+//    Creata POST
+//    Read GET
+//    Update PUT
+//    Delete DELETE
 }
