@@ -1,11 +1,13 @@
-package employeesspring;
+package movies;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class CreateEmployeeCommand {
+public class CreateMovieCommand {
 
     private String name;
+    private long length;
+
 }
