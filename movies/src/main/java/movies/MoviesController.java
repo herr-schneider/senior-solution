@@ -55,6 +55,7 @@ public class MoviesController {
 //    }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.I_AM_A_TEAPOT)
     public void deleteMovie(@PathVariable("id") long id) {
         moviesService.deleteEmployee(id);
     }
