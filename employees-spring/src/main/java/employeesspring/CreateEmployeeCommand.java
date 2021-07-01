@@ -3,9 +3,17 @@ package employeesspring;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
-@AllArgsConstructor
+//@Data
+//@AllArgsConstructor
 public class CreateEmployeeCommand {
 
     private String name;
+
+    public CreateEmployeeCommand(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
