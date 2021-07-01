@@ -11,6 +11,13 @@ class MoviesServiceTest {
 
     @Test
     void ratingMovie() {
+        service.crateMovie(new CreateMovieCommand("batman",120));
+        System.out.println(service.ratingMovie(1, new RatingMovie(4)));
+        System.out.println(service.ratingMovie(1, new RatingMovie(5)));
+        System.out.println(service.ratingMovie(1, new RatingMovie(4)));
+        System.out.println(service.ratingMovie(1, new RatingMovie(5)));
+
+
     }
 
     @Test

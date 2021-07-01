@@ -12,25 +12,31 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class MoviesService {
     List<Movie> movies = new ArrayList<>();
-    private AtomicLong id;
+    private AtomicLong id = new AtomicLong();
     private ModelMapper modelMapper;
 
     public MoviesService(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
-    public double ratingMovie(long id, int rate) {
-        movies.stream()
+//    public double ratingMovie(long id, int rate) {
+//        movies.stream()
+//                .filter(m -> m.getId() == id)
+//                .forEach(movie -> movie.addRate(rate));
+//
+//        return movies.stream()
+//                .filter(m -> m.getId() == id)
+//                .map(movie -> movie.getAverage())
+//                .findFirst()
+//                .get();
+//    }
+
+    public double ratingMovie(long id, RatingMovie rate) {
+        Movie movie = movies.stream()
                 .filter(m -> m.getId() == id)
-                .forEach(movie -> movie.addRate(rate));
-
-        return movies.stream()
-                .filter(m -> m.getId() == id)
-                .map(movie -> movie.getAverage())
-                .findFirst()
-                .get();
-
-
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("There is no " + id));
+        return movie.addRate(rate.getRate());
     }
 
     public MovieDto findMovieByID(long id) {
@@ -50,12 +56,13 @@ public class MoviesService {
     }
 
     public List<MovieDto> getMovies() {
-        Type targetType = new TypeToken<List<MovieDto>>() {
-        }.getType();
+        Type targetType = new TypeToken<List<MovieDto>>() {}.getType();
         return modelMapper.map(new ArrayList<>(movies), targetType);
     }
 
-    public void crateMovie(CreateMovieCommand command) {
-        movies.add(new Movie(id.incrementAndGet(), command.getName(), command.getLength()));
+    public MovieDto crateMovie(CreateMovieCommand command) {
+        Movie movie = new Movie(id.incrementAndGet(), command.getName(), command.getLength());
+        movies.add(movie);
+        return modelMapper.map(movie, MovieDto.class);
     }
 }

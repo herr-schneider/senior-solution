@@ -45,6 +45,12 @@ public class MoviesController {
                 .body(problem);
     }
 
+    @PostMapping("/{id}/rating")
+    public double ratingMovie(@PathVariable("id") long id, @RequestBody RatingMovie rate) { //uj osztalyt letrehozni
+         return moviesService.ratingMovie(id, rate);
+    }
+
+
 //    @PostMapping("{id}/rating")
 //    public double ratingMovie(@PathVariable("id") long id, @RequestParam RatingMovie rate) { //uj osztalyt letrehozni
 //        try {
@@ -60,15 +66,15 @@ public class MoviesController {
         moviesService.deleteEmployee(id);
     }
 
-//    @PutMapping
-//    public MovieDto crateMovie(@RequestBody CreateMovieCommand command){
-//        moviesService.crateMovie(command);
-//    }
+    @PutMapping
+    public MovieDto crateMovie(@RequestBody CreateMovieCommand command){
+        return moviesService.crateMovie(command);
+    }
 
 
 //    data  http
-//    Create POST
+//    Create POST többször
 //    Read GET
-//    Update PUT
+//    Update PUT cssak egyszer fut le
 //    Delete DELETE
 }

@@ -1,0 +1,32 @@
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 3
+}
+
+###
+
+GET http://localhost:8080/api/movies/1
+Accept: application/json
+
+###
+PUT http://localhost:8080/api/movies
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "John Doe",
+  "length" : 120
+}
+
+###
+
+###
+GET http://localhost:8080/api/movies
+Accept: application/json
+
+###
+
+

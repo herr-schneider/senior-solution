@@ -24,10 +24,12 @@ public class Movie {
         this.length = length;
     }
 
-    public void addRate(int rate){
+    public double addRate(int rate){
         imdb.add(rate);
 
         average = imdb.stream().collect(Collectors.summarizingInt(Integer::intValue)).getAverage();
+
+        return average;
     }
 
 //    public double getAverage(){
