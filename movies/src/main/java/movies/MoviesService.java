@@ -31,12 +31,13 @@ public class MoviesService {
 //                .get();
 //    }
 
-    public double ratingMovie(long id, RatingMovie rate) {
+    public MovieDto ratingMovie(long id, RatingMovie rate) {
         Movie movie = movies.stream()
                 .filter(m -> m.getId() == id)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("There is no " + id));
-        return movie.addRate(rate.getRate());
+        movie.addRate(rate.getRate());
+        return modelMapper.map(movie, MovieDto.class);
     }
 
     public MovieDto findMovieByID(long id) {

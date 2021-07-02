@@ -21,6 +21,7 @@ public class MoviesController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<MovieDto> getMovies(){
         return moviesService.getMovies();
     }
@@ -46,7 +47,7 @@ public class MoviesController {
     }
 
     @PostMapping("/{id}/rating")
-    public double ratingMovie(@PathVariable("id") long id, @RequestBody RatingMovie rate) { //uj osztalyt letrehozni
+    public MovieDto ratingMovie(@PathVariable("id") long id, @RequestBody RatingMovie rate) { //uj osztalyt letrehozni
          return moviesService.ratingMovie(id, rate);
     }
 
@@ -73,7 +74,7 @@ public class MoviesController {
 
 
 //    data  http
-//    Create POST többször
+//    Create POST többször idempotens
 //    Read GET
 //    Update PUT cssak egyszer fut le
 //    Delete DELETE
