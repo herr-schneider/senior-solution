@@ -17,8 +17,10 @@ public class MoviesIT {
 
     @Test
     void getHistoryTest() {
+        controller.crateMovie(new CreateMovieCommand("Batman", 120));
+        controller.crateMovie(new CreateMovieCommand("Catch if you can", 100));
         List<MovieDto> result = controller.getMovies();
-        assertThat(result).hasSize(5)
+        assertThat(result).hasSize(2)
                 .extracting(MovieDto::getName)
                 .contains("Batman");
     }
