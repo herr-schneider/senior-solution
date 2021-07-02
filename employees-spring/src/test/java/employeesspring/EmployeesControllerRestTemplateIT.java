@@ -30,12 +30,11 @@ public class EmployeesControllerRestTemplateIT {
 
     @Test
     void TestListEmployees() {
-        List<EmployeeDto> result = template.execute("/api/emp/param",
+        List<EmployeeDto> result = template.exchange("/api/emp/param",
                 HttpMethod.GET,
                 null,
-                null,
                 new ParameterizedTypeReference<List<EmployeeDto>>() {
-                });
+                }).getBody();
 
         System.out.println(result);
 //        assertThat(result).
