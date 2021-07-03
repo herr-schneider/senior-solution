@@ -38,6 +38,10 @@ public class MoviesControllerRestTemplateIT {
                 .hasSize(3)
                 .extracting(MovieDto::getName)
                 .contains("Batman");
+
+//                template.put("/api/instruments/1", new UpdatePriceCommand(1000));
+//
+//        InstrumentDTO result = template.getForObject("/api/instruments/1",InstrumentDTO.class);
     }
 
     @Test
