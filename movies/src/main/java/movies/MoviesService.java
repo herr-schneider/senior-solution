@@ -2,6 +2,7 @@ package movies;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Type;
@@ -12,10 +13,13 @@ import java.util.concurrent.atomic.AtomicLong;
 @Service
 public class MoviesService {
     List<Movie> movies = new ArrayList<>();
-    private AtomicLong id = new AtomicLong();
+
     private ModelMapper modelMapper;
 
-    public MoviesService(ModelMapper modelMapper) {
+    private AtomicLong id; // = new AtomicLong();
+
+    public MoviesService(ModelMapper modelMapper, AtomicLong atomicLong) {
+        this.id = atomicLong;
         this.modelMapper = modelMapper;
     }
 
@@ -57,7 +61,8 @@ public class MoviesService {
     }
 
     public List<MovieDto> getMovies() {
-        Type targetType = new TypeToken<List<MovieDto>>() {}.getType();
+        Type targetType = new TypeToken<List<MovieDto>>() {
+        }.getType();
         return modelMapper.map(new ArrayList<>(movies), targetType);
     }
 
