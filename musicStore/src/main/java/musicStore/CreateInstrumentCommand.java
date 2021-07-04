@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 public class CreateInstrumentCommand {
 
-    @NotBlank
+    @NotBlank(message = "Empty Brand name")
     private String brand;
     private InstrumentType type;
 

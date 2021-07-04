@@ -3,6 +3,7 @@ package musicStore;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
@@ -11,6 +12,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/instruments")
@@ -29,6 +31,7 @@ public class MusicStoreController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public InstrumentDTO addInstrument(@Valid @RequestBody CreateInstrumentCommand newInstrument) {
         return musicStoreService.addInstrument(newInstrument);
     }
@@ -39,11 +42,13 @@ public class MusicStoreController {
 //    }
 
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     public InstrumentDTO updatePrice(@PathVariable("id") long id, @Valid @RequestBody UpdatePriceCommand command) {
         return musicStoreService.updatePrice(id, command);
     }
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public InstrumentDTO getInstrument(@PathVariable("id") long id) {
         return musicStoreService.getInstrument(id);
     }
@@ -62,7 +67,7 @@ public class MusicStoreController {
 
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Problem> handleNotFound(IllegalArgumentException iae){
+    public ResponseEntity<Problem> handleNotFound(IllegalArgumentException iae) {
         Problem problem = Problem.builder()
                 .withType(URI.create("instruments/not-found"))
                 .withTitle("Not found!")
@@ -75,6 +80,25 @@ public class MusicStoreController {
                 .body(problem);
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Problem> handleValidException(MethodArgumentNotValidException mnve) {
+        List<Violation> violations = mnve.getBindingResult().getFieldErrors().stream()
+                .map(fe -> new Violation(fe.getField(), fe.getDefaultMessage()))
+                .collect(Collectors.toList());
+
+        Problem problem = Problem.builder()
+                .withType(URI.create("instruments/not-valid"))
+                .withTitle("Validation error")
+                .withStatus(Status.BAD_REQUEST)
+                .withDetail(mnve.getMessage())
+                .with("violations", violations)
+                .build();
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+                .body(problem);
+    }
     //    data  http
 //    Create POST többször idempotens
 //    Read GET
