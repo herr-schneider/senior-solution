@@ -7,6 +7,7 @@ import lombok.Data;
 //@AllArgsConstructor
 public class CreateEmployeeCommand {
 
+    @Name(minLength = 3, maxLength = 40)
     private String name;
 
     public CreateEmployeeCommand(String name) {
