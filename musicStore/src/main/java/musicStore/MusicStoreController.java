@@ -81,7 +81,7 @@ public class MusicStoreController {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Problem> handleValidException(MethodArgumentNotValidException mnve) {
         List<Violation> violations = mnve.getBindingResult().getFieldErrors().stream()
                 .map(fe -> new Violation(fe.getField(), fe.getDefaultMessage()))
@@ -104,5 +104,6 @@ public class MusicStoreController {
 //    Read GET
 //    Update PUT cssak egyszer fut le
 //    Delete DELETE
+
 
 }

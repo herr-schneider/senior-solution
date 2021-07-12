@@ -19,7 +19,7 @@ public class MusicStoreService {
     private ModelMapper modelMapper;
 
     public MusicStoreService(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
+            this.modelMapper = modelMapper;
     }
 
     public List<InstrumentDTO> getInstruments(Optional<String> brand, Optional<Integer> price) {
