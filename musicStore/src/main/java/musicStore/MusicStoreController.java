@@ -100,9 +100,9 @@ public class MusicStoreController {
                 .body(problem);
     }
     //    data  http
-//    Create POST többször idempotens
+//    Create POST többször fut, az eredmény mindig változik
 //    Read GET
-//    Update PUT cssak egyszer fut le
+//    Update PUT csak egyszer fut le idempotens
 //    Delete DELETE
 
 
