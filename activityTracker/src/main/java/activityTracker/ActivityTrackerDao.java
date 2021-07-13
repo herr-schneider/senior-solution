@@ -38,6 +38,8 @@ public class ActivityTrackerDao {
         Activity activity = entityManager.find(Activity.class, id);
         entityManager.remove(activity);
         entityManager.getTransaction().commit();
+        entityManager.close();
+        entityManagerFactory.close();
     }
 
     public List<Activity> findAllActivity(String type) {
