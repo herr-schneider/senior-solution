@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeesService {
 
-    private EmployeesDao employeesDao = new EmployeesDao(Persistence.createEntityManagerFactory("pu"));
+    private EmployeesDao employeesDao; // = new EmployeesDao(Persistence.createEntityManagerFactory("pu"));
 
     private ModelMapper modelMapper;
 
