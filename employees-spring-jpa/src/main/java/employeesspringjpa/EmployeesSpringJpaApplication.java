@@ -25,7 +25,7 @@ public class EmployeesSpringJpaApplication {
         return new ObjectMapper().findAndRegisterModules();
     }
 
-   @Bean
-   public EmployeesDao employeeDao(){ return new EmployeesDao(Persistence.createEntityManagerFactory("pu"), new ModelMapper());}
+//   @Bean
+//   public EmployeesDao employeeDao(){ return new EmployeesDao(Persistence.createEntityManagerFactory("pu"));}
 
 }

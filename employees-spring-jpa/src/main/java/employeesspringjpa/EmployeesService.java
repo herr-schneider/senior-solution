@@ -17,41 +17,45 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeesService {
 
+    private EmployeesDao employeesDao = new EmployeesDao(Persistence.createEntityManagerFactory("pu"));
 
-    @Autowired
-    private EmployeesDao employeesDao; // = new EmployeesDao(Persistence.createEntityManagerFactory("pu"));
-
-    @Autowired
     private ModelMapper modelMapper;
 
     public EmployeesService(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
 
-
     public List<EmployeeDto> listEmployee() {
-        return employeesDao.listEmployee();
+        Type targetType = new TypeToken<List<EmployeeDto>>() {
+        }.getType();
+//        List<EmployeeDto> result = employeesDao.listEmployee().stream()
+//                .map(e -> modelMapper.map(e, EmployeeDto.class))
+//                .collect(Collectors.toList());
+//        return result;
+        return modelMapper.map(employeesDao.listEmployee(), targetType);
     }
 
     public List<EmployeeDto> listEmployeeParam(Optional<String> prefix) {
+        String name = "%";
+        if (prefix.isPresent()){name= "%"+prefix.get()+"%";}
         Type targetType = new TypeToken<List<EmployeeDto>>() {
         }.getType();
-        return modelMapper.map(employeesDao.listEmployeeParam(prefix), targetType);
+        return modelMapper.map(employeesDao.listEmployeeParam(name), targetType);
     }
 
     public EmployeeDto findEmployeeByID(long id) {
-        return employeesDao.findEmployeeByID(id);
+        return modelMapper.map(employeesDao.findEmployeeByID(id), EmployeeDto.class);
     }
 
     public EmployeeDto createEmployee(CreateEmployeeCommand createEmployeeCommand){
-        return employeesDao.createEmployee(createEmployeeCommand);
+        return modelMapper.map(employeesDao.createEmployee(createEmployeeCommand), EmployeeDto.class);
     }
 
     public EmployeeDto updateEmployee(long id, UpdateEmployeeCommand command) {
-       return employeesDao.updateEmployee(id, command);
+        return modelMapper.map(employeesDao.updateEmployee(id, command), EmployeeDto.class);
     }
 
-    public void deleteEmployee(long id) {
-        employeesDao.deleteByID(id);
+    public EmployeeDto deleteEmployee(long id) {
+        return modelMapper.map(employeesDao.deleteByID(id), EmployeeDto.class);
     }
 }

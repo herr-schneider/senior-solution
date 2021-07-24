@@ -3,7 +3,7 @@ Content-Type: application/json
 
 ###
 
-GET  http://localhost:8080/api/emp/param/2
+GET  http://localhost:8080/api/emp/param/1
 Content-Type: application/json
 
 ###
@@ -23,6 +23,15 @@ Content-Type: application/json
 
 ###
 
+GET  http://localhost:8080/api/emp/param?prefix=Doe
+Content-Type: application/json
+
+###
+
+GET  http://localhost:8080/api/emp/param?prefix=
+Content-Type: application/json
+
+###
 PUT http://localhost:8080/api/emp/param/2
 Accept: application/json
 Content-Type: application/json

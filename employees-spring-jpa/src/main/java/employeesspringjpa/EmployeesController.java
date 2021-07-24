@@ -68,8 +68,8 @@ public class EmployeesController {
 
     @DeleteMapping("/param/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteEmployee(@PathVariable("id") long id) {
-        employeesService.deleteEmployee(id);
+    public EmployeeDto deleteEmployee(@PathVariable("id") long id) {
+        return employeesService.deleteEmployee(id);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

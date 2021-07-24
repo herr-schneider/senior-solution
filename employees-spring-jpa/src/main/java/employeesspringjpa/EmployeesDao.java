@@ -15,66 +15,60 @@ public class EmployeesDao {
 
     private EntityManagerFactory entityManagerFactory;
 
-    private ModelMapper modelMapper;
-
-    public EmployeesDao(EntityManagerFactory entityManagerFactory, ModelMapper modelMapper) {
+    public EmployeesDao(EntityManagerFactory entityManagerFactory) {
         this.entityManagerFactory = entityManagerFactory;
-        this.modelMapper = modelMapper;
     }
 
-    public List<EmployeeDto> listEmployee() {
+    public List<Employee> listEmployee() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<EmployeeDto> result = entityManager.createQuery("select em from Employee em", Employee.class)
-                .getResultStream()
-                .map(e -> modelMapper.map(e, EmployeeDto.class))
-                .collect(Collectors.toList());
+        List<Employee> result = entityManager.createQuery("select em from Employee em", Employee.class)
+             .getResultList();
         entityManager.close();
         return result;
     }
 
-    public EmployeeDto findEmployeeByID(long id) {
+    public Employee findEmployeeByID(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         Employee employee = entityManager.find(Employee.class, id);
         entityManager.close();
-        return modelMapper.map(employee, EmployeeDto.class);
+        return employee;
     }
 
 
-    public EmployeeDto createEmployee(CreateEmployeeCommand createEmployeeCommand) {
+    public Employee createEmployee(CreateEmployeeCommand createEmployeeCommand) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         Employee employee = new Employee(createEmployeeCommand.getName());
         entityManager.persist(employee);
         entityManager.getTransaction().commit();
         entityManager.close();
-        return modelMapper.map(employee, EmployeeDto.class);
+        return employee;
     }
 
-    public EmployeeDto updateEmployee(long id, UpdateEmployeeCommand command) {
+    public Employee updateEmployee(long id, UpdateEmployeeCommand command) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         Employee employee = entityManager.find(Employee.class, id);
         employee.setName(command.getName());
         entityManager.getTransaction().commit();
         entityManager.close();
-        return modelMapper.map(employee, EmployeeDto.class);
+        return employee;
     }
 
-    public void deleteByID(long id) {
+    public Employee deleteByID(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         Employee employee = entityManager.find(Employee.class, id);
         entityManager.remove(employee);
         entityManager.getTransaction().commit();
         entityManager.close();
+        return employee;
     }
 
-    public List<Employee> listEmployeeParam(Optional<String> prefix) {
-//        Type targetType = new TypeToken<List<EmployeeDto>>() {
-//        }.getType();
+    public List<Employee> listEmployeeParam(String name) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         List<Employee> filtered = entityManager.createQuery("select em from Employee em where em.name like :name", Employee.class)
-                .setParameter("name", prefix)
+                .setParameter("name", name)
                 .getResultList();
         entityManager.close();
         return filtered;
