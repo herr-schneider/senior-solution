@@ -1,0 +1,552 @@
+GET http://localhost:8080/api/emp/param/2
+Content-Type: application/json
+
+<> 2021-07-24T133551.200.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T133547.201.json
+
+###
+
+GET http://localhost:8080/api/emp/param/2
+Content-Type: application/json
+
+<> 2021-07-24T133542.404.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T133530.201.json
+
+###
+
+GET http://localhost:8080/api/emp/param/2
+Content-Type: application/json
+
+<> 2021-07-24T133158.200.json
+
+###
+
+GET http://localhost:8080/api/emp/param?prefix=john
+Content-Type: application/json
+
+<> 2021-07-24T133140.200.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T133047.201.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T133028.201.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T132759.500.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T132635.500.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T132435.400.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T132341.400.json
+
+###
+
+GET http://localhost:8080/api/emp/param?prefix=john
+Content-Type: application/json
+
+<> 2021-07-24T131446.200.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T131439.400.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T125710.400.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T124441.400.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T124406.400.json
+
+###
+
+GET http://localhost:8080/api/emp
+Content-Type: application/json
+
+<> 2021-07-24T124356.200.json
+
+###
+
+GET http://localhost:8080/api/emp/param/3
+Content-Type: application/json
+
+<> 2021-07-24T124347.500.json
+
+###
+
+GET http://localhost:8080/api/emp/param?prefix=john
+Content-Type: application/json
+
+<> 2021-07-24T124343.200.json
+
+###
+
+GET http://localhost:8080/api/emp/param?prefix=john
+Content-Type: application/json
+
+<> 2021-07-24T124331.200.json
+
+###
+
+POST http://localhost:8080/api/emp
+Accept: application/json
+Content-Type: application/json
+
+{
+"name" : "Bill Doe"
+}
+
+<> 2021-07-24T124030.400.json
+
+###
+
+GET http://localhost:8080/api/emp
+Content-Type: application/json
+
+<> 2021-07-24T124014.200.json
+
+###
+
+POST http://localhost:8080/api/instruments
+Content-Type: application/json
+
+{
+  "brand" : "",
+  "type" : "PIANO",
+  "price" : 1400
+}
+
+<> 2021-07-04T111047.400.json
+
+###
+
+GET http://localhost:8080/api/instruments
+Accept: application/json
+
+<> 2021-07-04T111012.200.json
+
+###
+
+POST http://localhost:8080/api/instruments
+Content-Type: application/json
+
+{
+  "brand" : "kocsogduda",
+  "type" : "PIANO",
+  "price" : 1400
+}
+
+<> 2021-07-04T110918.201.json
+
+###
+
+POST http://localhost:8080/api/instruments
+Content-Type: application/json
+
+{
+  "brand" : "kocsogduda",
+  "type" : "InstrumentType.PIANO",
+  "price" : 1400
+}
+
+<> 2021-07-04T110802.400.json
+
+###
+
+POST http://localhost:8080/api/instruments
+Content-Type: application/json
+
+{
+  "brand" : "kocsogduda",
+  "type" : InstrumentType.PIANO,
+  "price" : 1400
+}
+
+<> 2021-07-04T110736.400.json
+
+###
+
+POST http://localhost:8080/api/instruments
+Content-Type: application/json
+
+{
+  "brand" : "kocsogduda",
+  "type" : "InstrumentType.PIANO"
+  "price" : 1400
+}
+
+<> 2021-07-04T110712.400.json
+
+###
+
+PUT http://localhost:8080/api/movies
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "John Doe",
+  "length" : 120
+}
+
+<> 2021-07-02T143130.200.json
+
+###
+
+PUT http://localhost:8080/api/movies
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "John Doe",
+  "length" : 120
+}
+
+<> 2021-07-02T143121.200.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 4
+}
+
+<> 2021-07-02T110621.200.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 3
+}
+
+<> 2021-07-02T110611.200.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 3
+}
+
+<> 2021-07-02T110607.200.json
+
+###
+
+PUT http://localhost:8080/api/movies
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "John Doe",
+  "length" : 120
+}
+
+<> 2021-07-02T110558.200.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 3
+}
+
+<> 2021-07-02T110342.200.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 3
+}
+
+<> 2021-07-02T110338.200.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 3
+}
+
+<> 2021-07-02T110331.200.json
+
+###
+
+PUT http://localhost:8080/api/movies
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "John Doe",
+  "length" : 120
+}
+
+<> 2021-07-02T110322.200.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 3
+}
+
+<> 2021-07-01T215904.200.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 4
+}
+
+<> 2021-07-01T215856.200.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 4
+}
+
+<> 2021-07-01T215846.200.json
+
+###
+
+PUT http://localhost:8080/api/movies
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "John Doe",
+  "length" : 120
+}
+
+<> 2021-07-01T215842.200.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 4
+}
+
+<> 2021-07-01T215227.400.json
+
+###
+
+GET http://localhost:8080/api/movies
+Accept: application/json
+
+<> 2021-07-01T215221.200.json
+
+###
+
+PUT http://localhost:8080/api/movies
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "John Doe",
+  "length" : 120
+}
+
+<> 2021-07-01T215215.200.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 4
+}
+
+<> 2021-07-01T214945.400.json
+
+###
+
+PUT http://localhost:8080/api/movies
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "John Doe",
+  "length" : 120
+}
+
+<> 2021-07-01T214938.200.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 4
+}
+
+<> 2021-07-01T214652.400.json
+
+###
+
+POST http://localhost:8080/api/movies/1/rating
+Content-Type: application/json
+Accept: application/json
+
+{
+  "rate": 4
+}
+
+<> 2021-07-01T214124.400.json
+
+###
+
