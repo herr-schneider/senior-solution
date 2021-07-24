@@ -70,10 +70,11 @@ public class EmployeesDao {
     }
 
     public List<Employee> listEmployeeParam(Optional<String> prefix) {
-        Type targetType = new TypeToken<List<EmployeeDto>>() {
-        }.getType();
+//        Type targetType = new TypeToken<List<EmployeeDto>>() {
+//        }.getType();
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<Employee> filtered = entityManager.createQuery("select em from Employee em", Employee.class)
+        List<Employee> filtered = entityManager.createQuery("select em from Employee em where em.name like :name", Employee.class)
+                .setParameter("name", prefix)
                 .getResultList();
         entityManager.close();
         return filtered;
