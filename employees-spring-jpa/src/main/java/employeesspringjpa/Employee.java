@@ -5,16 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
-//@Table(name = "Alkalmazott")
+enum EmployeeType {
+    QUAD_TIME, HALF_TIME, FULL_TIME;
+}
 
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Entity
+@Table(name = "Alkalmazott")
 public class Employee {
 
     @Id
@@ -27,12 +31,27 @@ public class Employee {
 
 //    @Enumerated(EnumType.STRING)
 //    private EmployeeType employeeType = EmployeeType.FULL_TIME;
-//
-//    @ElementCollection
-//    private List<String> nicknames;
+
+    @ElementCollection
+    @Cascade(CascadeType.REMOVE)
+    private Set<String> nicknames;
+
+    public Employee() {
+    }
 
     public Employee(String name) {
         this.name = name;
+    }
+
+    public Employee(String name, Set<String> nicknames) {
+        this.name = name;
+        this.nicknames = nicknames;
+    }
+
+    public Employee(Long id, String name, Set<String> nicknames) {
+        this.id = id;
+        this.name = name;
+        this.nicknames = nicknames;
     }
 
     public Long getId() {
@@ -50,7 +69,7 @@ public class Employee {
     public void setName(String name) {
         this.name = name;
     }
-//
+
 //    public EmployeeType getEmployeeType() {
 //        return employeeType;
 //    }
@@ -58,12 +77,23 @@ public class Employee {
 //    public void setEmployeeType(EmployeeType employeeType) {
 //        this.employeeType = employeeType;
 //    }
-//
-//    public List<String> getNicknames() {
-//        return nicknames;
-//    }
-//
-//    public void setNicknames(List<String> nicknames) {
-//        this.nicknames = nicknames;
-//    }
+
+    public Set<String> getNicknames() {
+        return nicknames;
+    }
+
+    public void addNickName(String nickname){
+        nicknames.add(nickname);
+    }
+
+    public void setNicknames(Set<String> nicknames) {
+        this.nicknames = nicknames;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'';
+    }
 }

@@ -6,6 +6,7 @@ import org.modelmapper.ModelMapper;
 
 import javax.persistence.Persistence;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,6 +23,10 @@ class EmployeeTest {
     @Test
     void setNicknames() {
     Employee e = new Employee("John Doe");
-    //e.setNicknames(List.of("okoska", "néger"));
+    e.setNicknames(Set.of("okoska", "néger"));
+    employeesDao.saveEmployee(e);
+        System.out.println(employeesDao.listEmployee());
+        Employee ae = employeesDao.findEmployeeByNameWithNicknames("John Doe");
+        System.out.println(ae);
     }
 }

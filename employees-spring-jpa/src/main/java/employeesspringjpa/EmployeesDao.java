@@ -1,15 +1,10 @@
 package employeesspringjpa;
 
-import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 public class EmployeesDao {
 
@@ -34,6 +29,34 @@ public class EmployeesDao {
         return employee;
     }
 
+    public Employee findEmployeeByIDWithNicknames(long id) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Employee employee = entityManager.createQuery("select e from Employee e join fetch e.nicknames where e.id = :id",
+                Employee.class)
+                .setParameter("id", id)
+                .getSingleResult();
+        entityManager.close();
+        return employee;
+    }
+
+    public Employee findEmployeeByNameWithNicknames(String name) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Employee employee = entityManager.createQuery("select e from Employee e join fetch e.nicknames where e.name = :name",
+                Employee.class)
+                .setParameter("name", name)
+                .getSingleResult();
+        entityManager.close();
+        return employee;
+    }
+
+    public Employee saveEmployee(Employee employee) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        entityManager.persist(employee);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return employee;
+    }
 
     public Employee createEmployee(CreateEmployeeCommand createEmployeeCommand) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
