@@ -39,16 +39,6 @@ public class EmployeesDao {
         return employee;
     }
 
-    public Employee findEmployeeByNameWithNicknames(String name) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Employee employee = entityManager.createQuery("select e from Employee e join fetch e.nicknames where e.name = :name",
-                Employee.class)
-                .setParameter("name", name)
-                .getSingleResult();
-        entityManager.close();
-        return employee;
-    }
-
     public Employee saveEmployee(Employee employee) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -95,5 +85,15 @@ public class EmployeesDao {
                 .getResultList();
         entityManager.close();
         return filtered;
+    }
+
+    public Employee findEmployeeByNameWithNicknames(String name) {
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        Employee employee = entityManager.createQuery("select e from Employee e join fetch e.nicknames where e.name like :name",
+                Employee.class)
+                .setParameter("name", name)
+                .getSingleResult();
+        entityManager.close();
+        return employee;
     }
 }

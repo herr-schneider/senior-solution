@@ -5,18 +5,16 @@ import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.Persistence;
-import java.util.List;
+import java.util.Optional;
 import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class EmployeeTest {
 
-    private EmployeesDao employeesDao;
+    private EmployeesService service;
 
     @BeforeEach
     void  init() {
-       employeesDao = new EmployeesDao(Persistence.createEntityManagerFactory("pu"));
+       service = new EmployeesService(new ModelMapper());
     }
 
 
@@ -24,9 +22,9 @@ class EmployeeTest {
     void setNicknames() {
     Employee e = new Employee("John Doe");
     e.setNicknames(Set.of("okoska", "néger"));
-    employeesDao.saveEmployee(e);
-        System.out.println(employeesDao.listEmployee());
-        Employee ae = employeesDao.findEmployeeByNameWithNicknames("John Doe");
+    service.saveEmployee(e);
+       System.out.println(service.listEmployee());
+        EmployeeExtendedDto ae = service.findEmployeeByNameWithNicknames(Optional.of("John Doe"));
         System.out.println(ae);
     }
 }

@@ -42,6 +42,13 @@ public class EmployeesService {
         }.getType();
         return modelMapper.map(employeesDao.listEmployeeParam(name), targetType);
     }
+    public EmployeeExtendedDto  findEmployeeByNameWithNicknames(Optional<String> prefix) {
+        String name = "%";
+        if (prefix.isPresent()){name= "%"+prefix.get()+"%";}
+//        Type targetType = new TypeToken<List<EmployeeExtendedDto>>() {
+//        }.getType();
+        return modelMapper.map(employeesDao.findEmployeeByNameWithNicknames(name), EmployeeExtendedDto.class);
+    }
 
     public EmployeeDto findEmployeeByID(long id) {
         return modelMapper.map(employeesDao.findEmployeeByID(id), EmployeeDto.class);
@@ -57,5 +64,9 @@ public class EmployeesService {
 
     public EmployeeDto deleteEmployee(long id) {
         return modelMapper.map(employeesDao.deleteByID(id), EmployeeDto.class);
+    }
+
+    public EmployeeExtendedDto saveEmployee(Employee e) {
+        return modelMapper.map(employeesDao.saveEmployee(e), EmployeeExtendedDto.class);
     }
 }

@@ -11,15 +11,14 @@ import org.hibernate.annotations.CascadeType;
 import javax.persistence.*;
 import java.util.Set;
 
-enum EmployeeType {
-    QUAD_TIME, HALF_TIME, FULL_TIME;
-}
+
 
 //@NoArgsConstructor
 //@AllArgsConstructor
 @Entity
 @Table(name = "Alkalmazott")
 public class Employee {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +29,7 @@ public class Employee {
     private String name;
 
 //    @Enumerated(EnumType.STRING)
-//    private EmployeeType employeeType = EmployeeType.FULL_TIME;
+   private EmployeeType employeeType = EmployeeType.FULL_TIME;
 
     @ElementCollection
     @Cascade(CascadeType.REMOVE)
