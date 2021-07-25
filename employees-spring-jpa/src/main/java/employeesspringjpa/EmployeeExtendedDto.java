@@ -14,6 +14,7 @@ public class EmployeeExtendedDto {
     private Long id;
     private String name;
     private Set<String> nicknames;
+    private EmployeeType employeeType;
 
     public EmployeeExtendedDto(String name) {
         this.name = name;

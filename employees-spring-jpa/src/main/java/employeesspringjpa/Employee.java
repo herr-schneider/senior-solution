@@ -9,31 +9,41 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
-
 
 
 //@NoArgsConstructor
 //@AllArgsConstructor
+//@NamedQuery(name = "nameLike", query = "select e from Employee e join fetch e.nicknames where e.name like :name")
+//@Table(name = "Alkalmazott")
 @Entity
-@Table(name = "Alkalmazott")
+@Data
 public class Employee {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-  //  @Column(name = "Alk_nev", length = 200, nullable = false)
-  //  @Name
+    //  @Column(name = "Alk_nev", length = 200, nullable = false)
+    //  @Name
     private String name;
 
-//    @Enumerated(EnumType.STRING)
-   private EmployeeType employeeType = EmployeeType.FULL_TIME;
+    @Enumerated(EnumType.STRING)
+    private EmployeeType employeeType = EmployeeType.FULL_TIME;
 
-    @ElementCollection
-    @Cascade(CascadeType.REMOVE)
-    private Set<String> nicknames;
+//    @ElementCollection
+//    @OneToOne(cascade = javax.persistence.CascadeType.REMOVE)
+//    private Set<String> nicknames;
+
+    @OneToOne(cascade = javax.persistence.CascadeType.REMOVE)
+    private ParkingPlace parkingPlace;
+
+    //@OrderBy("type")
+    @OneToMany(cascade = {javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.REMOVE}, mappedBy = "employee")
+    @OrderColumn(name = "pos")
+    private List<PhoneNumber> phoneNumbers;
 
     public Employee() {
     }
@@ -42,16 +52,23 @@ public class Employee {
         this.name = name;
     }
 
-    public Employee(String name, Set<String> nicknames) {
-        this.name = name;
-        this.nicknames = nicknames;
-    }
-
-    public Employee(Long id, String name, Set<String> nicknames) {
-        this.id = id;
-        this.name = name;
-        this.nicknames = nicknames;
-    }
+//    public Employee(String name, Set<String> nicknames) {
+//        this.name = name;
+//        this.nicknames = nicknames;
+//    }
+//
+//    public Employee(Long id, String name, Set<String> nicknames) {
+//        this.id = id;
+//        this.name = name;
+//        this.nicknames = nicknames;
+//    }
+public void addPhoneNumber(PhoneNumber phoneNumber){
+        if (phoneNumbers == null){
+            phoneNumbers = new ArrayList<>();
+        }
+        phoneNumbers.add(phoneNumber);
+        phoneNumber.setEmployee(this);
+}
 
     public Long getId() {
         return id;
@@ -77,17 +94,17 @@ public class Employee {
 //        this.employeeType = employeeType;
 //    }
 
-    public Set<String> getNicknames() {
-        return nicknames;
-    }
-
-    public void addNickName(String nickname){
-        nicknames.add(nickname);
-    }
-
-    public void setNicknames(Set<String> nicknames) {
-        this.nicknames = nicknames;
-    }
+//    public Set<String> getNicknames() {
+//        return nicknames;
+//    }
+//
+//    public void addNickName(String nickname) {
+//        nicknames.add(nickname);
+//    }
+//
+//    public void setNicknames(Set<String> nicknames) {
+//        this.nicknames = nicknames;
+//    }
 
     @Override
     public String toString() {

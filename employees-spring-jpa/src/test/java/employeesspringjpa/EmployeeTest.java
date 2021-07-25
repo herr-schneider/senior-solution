@@ -18,13 +18,13 @@ class EmployeeTest {
     }
 
 
-    @Test
-    void setNicknames() {
-    Employee e = new Employee("John Doe");
-    e.setNicknames(Set.of("okoska", "néger"));
-    service.saveEmployee(e);
-       System.out.println(service.listEmployee());
-        EmployeeExtendedDto ae = service.findEmployeeByNameWithNicknames(Optional.of("John Doe"));
-        System.out.println(ae);
-    }
+//    @Test
+//    void setNicknames() {
+//    Employee e = new Employee("John Doe");
+//    e.setNicknames(Set.of("okoska", "néger"));
+//    service.saveEmployee(e);
+//       System.out.println(service.listEmployee());
+//        EmployeeExtendedDto ae = service.findEmployeeByNameWithNicknames(Optional.of("John Doe"));
+//        System.out.println(ae);
+//    }
 }

@@ -29,15 +29,15 @@ public class EmployeesDao {
         return employee;
     }
 
-    public Employee findEmployeeByIDWithNicknames(long id) {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Employee employee = entityManager.createQuery("select e from Employee e join fetch e.nicknames where e.id = :id",
-                Employee.class)
-                .setParameter("id", id)
-                .getSingleResult();
-        entityManager.close();
-        return employee;
-    }
+//    public Employee findEmployeeByIDWithNicknames(long id) {
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        Employee employee = entityManager.createQuery("select e from Employee e join fetch e.nicknames where e.id = :id",
+//                Employee.class)
+//                .setParameter("id", id)
+//                .getSingleResult();
+//        entityManager.close();
+//        return employee;
+//    }
 
     public Employee saveEmployee(Employee employee) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -68,14 +68,14 @@ public class EmployeesDao {
         return employee;
     }
 
-    public Employee deleteByID(long id) {
+    public void deleteByID(long id) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         Employee employee = entityManager.find(Employee.class, id);
         entityManager.remove(employee);
         entityManager.getTransaction().commit();
         entityManager.close();
-        return employee;
+        //return employee;
     }
 
     public List<Employee> listEmployeeParam(String name) {
@@ -87,12 +87,34 @@ public class EmployeesDao {
         return filtered;
     }
 
-    public Employee findEmployeeByNameWithNicknames(String name) {
+//    public Employee findEmployeeByNameWithNicknames(String name) {
+//        EntityManager entityManager = entityManagerFactory.createEntityManager();
+//        Employee employee = entityManager.createQuery("select e from Employee e join fetch e.nicknames where e.name like :name",
+//                Employee.class)
+//                .setParameter("name", name)
+//                .getSingleResult();
+//        entityManager.close();
+//        return employee;
+//    }
+
+    public Employee findEmployeeByNameWithPhoneNumbers(String name) {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
-        Employee employee = entityManager.createQuery("select e from Employee e join fetch e.nicknames where e.name like :name",
+        Employee employee = entityManager.createQuery("select e from Employee e join fetch e.phoneNumbers where e.name like :name",
                 Employee.class)
                 .setParameter("name", name)
                 .getSingleResult();
+        entityManager.close();
+        return employee;
+    }
+
+    public Employee addPhoneNumber(long emp_id, PhoneNumber phoneNumber){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        //Employee employee = entityManager.find(Employee.class, emp_id);
+        Employee employee = entityManager.getReference(Employee.class, emp_id);
+        phoneNumber.setEmployee(employee);
+        entityManager.persist(phoneNumber);
+        entityManager.getTransaction().commit();
         entityManager.close();
         return employee;
     }

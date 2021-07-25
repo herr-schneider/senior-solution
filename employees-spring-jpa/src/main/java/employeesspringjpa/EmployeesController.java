@@ -66,10 +66,16 @@ public class EmployeesController {
         }
     }
 
+//    @DeleteMapping("/param/{id}")
+//    @ResponseStatus(HttpStatus.NO_CONTENT)
+//    public EmployeeDto deleteEmployee(@PathVariable("id") long id) {
+//        return employeesService.deleteEmployee(id);
+//    }
+
     @DeleteMapping("/param/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public EmployeeDto deleteEmployee(@PathVariable("id") long id) {
-        return employeesService.deleteEmployee(id);
+    public void deleteEmployee(@PathVariable("id") long id) {
+       employeesService.deleteEmployee(id);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
