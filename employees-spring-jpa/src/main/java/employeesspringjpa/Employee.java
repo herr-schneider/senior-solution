@@ -37,12 +37,12 @@ public class Employee {
 //    @OneToOne(cascade = javax.persistence.CascadeType.REMOVE)
 //    private Set<String> nicknames;
 
-    @OneToOne(cascade = javax.persistence.CascadeType.REMOVE)
+    @OneToOne
     private ParkingPlace parkingPlace;
 
     //@OrderBy("type")
+    //@OrderColumn(name = "pos")
     @OneToMany(cascade = {javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.REMOVE}, mappedBy = "employee")
-    @OrderColumn(name = "pos")
     private List<PhoneNumber> phoneNumbers;
 
     public Employee() {
