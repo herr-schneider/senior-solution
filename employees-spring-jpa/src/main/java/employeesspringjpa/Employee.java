@@ -6,8 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+// import org.hibernate.annotations.Cascade; Confrict with Persist
+// import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,8 +28,8 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    //  @Column(name = "Alk_nev", length = 200, nullable = false)
-    //  @Name
+    @Column(name = "Alk_nev", length = 200, nullable = false)
+    @Name
     private String name;
 
     @Enumerated(EnumType.STRING)
@@ -101,17 +101,17 @@ public void addPhoneNumber(PhoneNumber phoneNumber){
         this.employeeType = employeeType;
     }
 
-//    public List<String> getNicknames() {
-//        return nicknames;
-//    }
-//
-//    public void addNickName(String nickname) {
-//        nicknames.add(nickname);
-//    }
-//
-//    public void setNicknames(List<String> nicknames) {
-//        this.nicknames = nicknames;
-//    }
+    public List<String> getNicknames() {
+        return nicknames;
+    }
+
+    public void addNickName(String nickname) {
+        nicknames.add(nickname);
+    }
+
+    public void setNicknames(List<String> nicknames) {
+        this.nicknames = nicknames;
+    }
 
     @Override
     public String toString() {

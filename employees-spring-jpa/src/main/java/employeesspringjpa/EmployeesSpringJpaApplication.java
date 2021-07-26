@@ -6,8 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import javax.persistence.Persistence;
-
 @SpringBootApplication
 public class EmployeesSpringJpaApplication {
 
@@ -24,5 +22,4 @@ public class EmployeesSpringJpaApplication {
     public ObjectMapper objectMapper(){
         return new ObjectMapper().findAndRegisterModules();
     }
-
 }
