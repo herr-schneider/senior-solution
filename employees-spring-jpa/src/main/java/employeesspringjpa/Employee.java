@@ -1,6 +1,7 @@
 package employeesspringjpa;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,16 +10,17 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 
-//@NoArgsConstructor
+
 //@AllArgsConstructor
 //@NamedQuery(name = "nameLike", query = "select e from Employee e join fetch e.nicknames where e.name like :name")
 //@Table(name = "Alkalmazott")
 @Entity
+@NoArgsConstructor
 @Data
 public class Employee {
 
@@ -33,35 +35,40 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private EmployeeType employeeType = EmployeeType.FULL_TIME;
 
-//    @ElementCollection
-//    @OneToOne(cascade = javax.persistence.CascadeType.REMOVE)
-//    private Set<String> nicknames;
+    @ElementCollection
+    private List<String> nicknames;
 
     @OneToOne
     private ParkingPlace parkingPlace;
 
-    //@OrderBy("type")
     //@OrderColumn(name = "pos")
+    @OrderBy("type")
     @OneToMany(cascade = {javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.REMOVE}, mappedBy = "employee")
     private List<PhoneNumber> phoneNumbers;
 
-    public Employee() {
-    }
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime birthday;
 
     public Employee(String name) {
         this.name = name;
     }
 
-//    public Employee(String name, Set<String> nicknames) {
-//        this.name = name;
-//        this.nicknames = nicknames;
-//    }
-//
-//    public Employee(Long id, String name, Set<String> nicknames) {
-//        this.id = id;
-//        this.name = name;
-//        this.nicknames = nicknames;
-//    }
+    public Employee(long id, String name) {
+        this.name = name;
+        this.id = id;
+    }
+
+    public Employee(String name, List<String> nicknames) {
+        this.name = name;
+        this.nicknames = nicknames;
+    }
+
+    public Employee(Long id, String name, List<String> nicknames) {
+        this.id = id;
+        this.name = name;
+        this.nicknames = nicknames;
+    }
+
 public void addPhoneNumber(PhoneNumber phoneNumber){
         if (phoneNumbers == null){
             phoneNumbers = new ArrayList<>();
@@ -86,15 +93,15 @@ public void addPhoneNumber(PhoneNumber phoneNumber){
         this.name = name;
     }
 
-//    public EmployeeType getEmployeeType() {
-//        return employeeType;
-//    }
-//
-//    public void setEmployeeType(EmployeeType employeeType) {
-//        this.employeeType = employeeType;
-//    }
+    public EmployeeType getEmployeeType() {
+        return employeeType;
+    }
 
-//    public Set<String> getNicknames() {
+    public void setEmployeeType(EmployeeType employeeType) {
+        this.employeeType = employeeType;
+    }
+
+//    public List<String> getNicknames() {
 //        return nicknames;
 //    }
 //
@@ -102,7 +109,7 @@ public void addPhoneNumber(PhoneNumber phoneNumber){
 //        nicknames.add(nickname);
 //    }
 //
-//    public void setNicknames(Set<String> nicknames) {
+//    public void setNicknames(List<String> nicknames) {
 //        this.nicknames = nicknames;
 //    }
 
