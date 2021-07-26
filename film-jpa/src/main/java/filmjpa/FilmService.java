@@ -1,27 +1,38 @@
 package filmjpa;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+@AllArgsConstructor
+@Service
 public class FilmService {
 
     private FilmRepo filmRepo;
 
-    public List<Film> listAllFilm() {
-        return filmRepo.findAll();
+    private ModelMapper modelMapper;
+
+    public List<FilmDto> listAllFilm() {
+        return filmRepo.findAll().stream()
+                .map(m -> modelMapper.map(m, FilmDto.class))
+                .collect(Collectors.toList());
     }
 
-    public Film createAFilm(CreateFilm createFilm){
+    public FilmDto createAFilm(CreateFilm createFilm){
         Film film = new Film(createFilm.getTitle());
         filmRepo.save(film);
-        return film;
+        return modelMapper.map(film, FilmDto.class);
     }
 
     @Transactional
-    public Film ratingFilm(long id, RatingFilm command){
+    public FilmDto ratingFilm(long id, RatingFilm command){
        Film film = filmRepo.findById(id).orElseThrow(() -> new IllegalArgumentException());
        film.addRating(command.getRating());
-       return film;
+       return modelMapper.map(film, FilmDto.class);
     }
 }

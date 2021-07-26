@@ -3,19 +3,19 @@ package filmjpa;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "movies")
 public class Film {
 
     @Id
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String title;
 
@@ -26,8 +26,15 @@ public class Film {
         this.title = title;
     }
 
-    public void addRating(int rate){
-        if (ratings == null) {ratings = new ArrayList<>();}
+    public Film(String title, List<Integer> ratings) {
+        this.title = title;
+        this.ratings = ratings;
+    }
+
+    public void addRating(int rate) {
+        if (ratings == null) {
+            ratings = new ArrayList<>();
+        }
         ratings.add(rate);
     }
 }

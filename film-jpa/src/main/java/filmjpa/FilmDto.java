@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import java.util.ArrayList;
 import java.util.List;
 
-
+//@AllArgsConstructor
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,19 +22,24 @@ public class FilmDto {
     private String title;
 
     @ElementCollection
-    private List<Integer> ratings;
+    private List<Integer> ratings = new ArrayList<>();
 
-    public FilmDto(String title) {
-        this.title = title;
-    }
+    private double average;
 
-    public FilmDto(String title, List<Integer> ratings) {
+    public FilmDto(long id, String title, List<Integer> ratings) {
+        this.id = id;
         this.title = title;
         this.ratings = ratings;
+//        this.average = this.ratings.stream().mapToInt(i -> i).average().orElseThrow(() -> new IllegalArgumentException());
+//        this.average = this.ratings.stream().reduce(0, (subtotal, element) -> subtotal + element);
+        this.average = this.ratings.stream().reduce(0, Integer::sum);
     }
 
-    public void addRating(int rate){
-        if (ratings == null) {ratings = new ArrayList<>();}
+
+    public void addRating(int rate) {
+        if (ratings == null) {
+            ratings = new ArrayList<>();
+        }
         ratings.add(rate);
     }
 }

@@ -12,14 +12,18 @@ public class FilmController {
 
     private FilmService filmService;
 
+    public FilmController(FilmService filmService) {
+        this.filmService = filmService;
+    }
+
     @GetMapping
-    public List<Film> listAllFilm() {
+    public List<FilmDto> listAllFilm() {
         return filmService.listAllFilm();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Film createEmployee(@RequestBody CreateFilm command) {
+    public FilmDto createEmployee(@RequestBody CreateFilm command) {
         return filmService.createAFilm(command);
     }
 
