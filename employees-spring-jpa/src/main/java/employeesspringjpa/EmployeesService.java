@@ -45,8 +45,8 @@ public class EmployeesService {
 //    public EmployeeExtendedDto  findEmployeeByNameWithNicknames(Optional<String> prefix) {
 //        String name = "%";
 //        if (prefix.isPresent()){name= "%"+prefix.get()+"%";}
-////        Type targetType = new TypeToken<List<EmployeeExtendedDto>>() {
-////        }.getType();
+//        Type targetType = new TypeToken<List<EmployeeExtendedDto>>() {
+//        }.getType();
 //        return modelMapper.map(employeesDao.findEmployeeByNameWithNicknames(name), EmployeeExtendedDto.class);
 //    }
 

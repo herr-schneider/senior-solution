@@ -30,9 +30,6 @@ public class FilmDto {
         this.id = id;
         this.title = title;
         this.ratings = ratings;
-//        this.average = this.ratings.stream().mapToInt(i -> i).average().orElseThrow(() -> new IllegalArgumentException());
-//        this.average = this.ratings.stream().reduce(0, (subtotal, element) -> subtotal + element);
-        this.average = this.ratings.stream().reduce(0, Integer::sum);
     }
 
 
