@@ -1,7 +1,7 @@
 package filmjpa;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+// import lombok.NoArgsConstructor; // soha ilyet, szetszopat a Spring
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
