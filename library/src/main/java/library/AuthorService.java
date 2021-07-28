@@ -42,7 +42,7 @@ public class AuthorService {
     @Transactional
     public AuthorDto addBook(long id, addBook command) {
         Author author = authorRepo.findById(id).orElseThrow(()-> new IllegalArgumentException()); //??authorRepo.getById(id);
-        author.addBook(new Book(command.getISBN(),command.getTitle()));
+        author.addBook(new Book(command.getISBN(), command.getTitle()));
         return modelMapper.map(author, AuthorDto.class);
     }
 

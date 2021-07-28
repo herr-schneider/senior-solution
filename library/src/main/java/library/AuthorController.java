@@ -33,7 +33,7 @@ public class AuthorController {
     }
 
     @PutMapping("/{id}/books")
-    public ResponseEntity ratingFilm(@PathVariable("id") long id, @RequestBody addBook command) {
+    public ResponseEntity AddBook(@PathVariable("id") long id, @RequestBody addBook command) {
         try {
             return ResponseEntity.ok(service.addBook(id, command));
         } catch (IllegalArgumentException iae) {

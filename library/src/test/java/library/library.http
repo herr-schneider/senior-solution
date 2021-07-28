@@ -1,0 +1,23 @@
+POST http://localhost:8080/api/authors
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name" : "Batman"
+}
+
+###
+
+GET http://localhost:8080/api/authors
+Accept: application/json
+
+###
+
+PUT http://localhost:8080/api/authors/1/books
+Accept: application/json
+Content-Type: application/json
+
+{
+  "isbn" : "1234567",
+  "title" : "LOTR"
+}
