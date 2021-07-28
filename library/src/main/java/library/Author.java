@@ -18,6 +18,7 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "emp_name", nullable = false)
     private String name;
 
     @OneToMany(cascade = {javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.REMOVE}, mappedBy = "author")
@@ -27,9 +28,9 @@ public class Author {
         this.name = name;
     }
 
-    public void addBook(Book book){
-        if (books == null){
-           books = new ArrayList<>();
+    public void addBook(Book book) {
+        if (books == null) {
+            books = new ArrayList<>();
         }
         books.add(book);
         book.setAuthor(this);
