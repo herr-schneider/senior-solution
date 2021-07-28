@@ -18,7 +18,7 @@ public class Book {
 
     private String title;
 
-    @ManyToOne
+    @ManyToOne(cascade = javax.persistence.CascadeType.REMOVE)
     private Author author;
 
     public Book(String ISBN, String title) {
